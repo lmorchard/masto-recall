@@ -1,5 +1,7 @@
 node_modules/
 data/
+tmp/
 *.pem
 .env
 *.sqlite3
+.sqlite_history
