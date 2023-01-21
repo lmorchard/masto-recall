@@ -1,0 +1,43 @@
+{
+  "name": "masto-recall",
+  "version": "1.0.0",
+  "description": "This is an app that indexes messages from the Mastodon streaming API",
+  "type": "module",
+  "engines": {
+    "node": "16.x"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js serve",
+    "dev": "nodemon index.js serve | pino-pretty"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "data.sqlite3",
+      "**/data/**"
+    ],
+    "delay": 500
+  },
+  "author": "Les Orchard <me@lmorchard.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@fastify/accepts": "^4.1.0",
+    "@fastify/compress": "^6.2.0",
+    "@fastify/static": "^6.6.1",
+    "@hapi/boom": "^10.0.0",
+    "altair-fastify-plugin": "^5.0.9",
+    "axios": "^1.2.2",
+    "commander": "^10.0.0",
+    "convict": "^6.2.4",
+    "dotenv": "^16.0.3",
+    "fastify": "^4.11.0",
+    "knex": "^2.4.0",
+    "mercurius": "^11.5.0",
+    "nodemon": "^2.0.20",
+    "objection": "^3.0.1",
+    "p-queue": "^7.3.0",
+    "pino": "^8.8.0",
+    "pino-pretty": "^9.1.1",
+    "sqlite3": "^5.1.4"
+  }
+}
