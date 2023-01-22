@@ -57,3 +57,12 @@ body {
   visibility: visible !important;
   opacity: 0.5;
 }
+
+.modal-media-attachment {
+  height: 90vh;
+}
+
+.modal-media-attachment #media-attachment-display {
+  min-height: 70vh;
+  max-height: 80vh;
+}

@@ -5,7 +5,7 @@
     <div class="container w-100">
       <div class="row w-100">
         <div class="col">
-          <input name="q" type="text" class="form-control" autofocus placeholder="search terms" value="{{ searchQuery }}">
+          <input id="searchField" name="q" type="text" class="form-control" autofocus placeholder="search" value="{{ searchQuery }}">
         </div>
         <div class="col col-md-1">
           <button class="w-100 btn btn-primary" type="submit" title="Search">🔎</button>
@@ -14,29 +14,59 @@
     </div>
   </form>
 
-  <section class="container text-left mt-3 m-auto">
-    <div class="col">
-      <h2>Search for "{{ searchQuery }}" ({{ searchResults.length }} results)</h2>
-      <ul class="text-left search-results">
-        {{#each searchResults}}
-          <li id="{{ id }}" class="card status">
-            <div class="card-header">
-              <!--{{ statusCreatedAt }}</a>-->
-              <a href="{{ account.url }}" target="_blank"><img class="avatar" src="{{ account.avatar }}" width="48" height="48" /></a>
-              <h5 class="card-title">{{ account.display_name }}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ account.url }}" target="_blank">{{ account.acct }}</a></h6>
-            </div>
-            <div class="card-body">
-              <div class="card-text">{{{ content }}}</div>
-            </div>
-            <div class="card-footer fs-6 text-end text-muted">
-              <a href="{{ url }}" target="_blank"><time datetime="{{ created_at }}">{{ created_at_text }}</time></a>
-            </div>
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-  </section>
+  {{#if searchQuery}}
+    <section class="container text-left mt-3 m-auto">
+      <div class="col">
+        <h2>Search for "{{ searchQuery }}" ({{ searchResults.length }} results)</h2>
+        <ul class="text-left search-results">
+          {{#each searchResults}}
+            <li id="{{ id }}" class="card status">
+              <div class="card-header">
+                <a href="{{ account.url }}" target="_blank"><img class="avatar" src="{{ account.avatar }}" width="48" height="48" /></a>
+                <h5 class="card-title">{{ account.display_name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ account.url }}" target="_blank">{{ account.acct }}</a></h6>
+              </div>
+              <div class="card-body">
+                <div class="card-text">{{{ content }}}</div>
+              </div>
+              {{#if media_attachments.length }}
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item media-attachments">
+                    {{#each media_attachments }}
+                      <img class="media-attachment" src="{{ preview_url }}" width="48" height="48"
+                          data-bs-toggle="modal" data-bs-target="#exampleModal"
+                          data-fullsrc="{{ remote_url }}" title="{{ description }}" />
+                    {{/each}}
+                  </li>
+                </ul>
+              {{/if}}
+              <div class="card-footer fs-6 text-end text-muted">
+                <a href="{{ url }}" target="_blank"><time datetime="{{ created_at }}">{{ shortDateTime created_at }}</time></a>
+              </div>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    </section>
+  {{/if}}
 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-media-attachment">
+      <div class="modal-content mh-vh-100">
+        <!--
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        -->
+        <div class="modal-body text-center">
+          <figure class="figure">
+            <figcaption id="media-attachment-description" class="figure-caption mb-4"></figcaption>
+            <img src="" id="media-attachment-display" class="object-fit-xl-contain figure-img img-fluid rounded" alt="...">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 {{/pageLayout}}
