@@ -4,6 +4,7 @@
   <form class="w-100 m-auto" method="GET" action="./">
     <div class="container w-100">
       <div class="row w-100">
+        <h1 class="text-center">{{ meta.botName }}</h1>
         <div class="col">
           <input id="searchField" name="q" type="text" class="form-control" autofocus placeholder="search" value="{{ searchQuery }}">
         </div>
@@ -50,7 +51,24 @@
     </section>
   {{/if}}
 
-  <!-- Modal -->
+  <div class="card text-center w-25 m-auto mt-5">
+    <div class="card-header">
+      <h5 class="card-title">Stats</h5>
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <tbody>
+          {{#each meta as |value name|}}
+            <tr>
+              <td scope="row">{{ name }}</td>
+              <td>{{ value }}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-media-attachment">
       <div class="modal-content mh-vh-100">
