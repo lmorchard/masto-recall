@@ -59,10 +59,10 @@ body {
 }
 
 .modal-media-attachment {
-  height: 90vh;
+  height: 80vh;
 }
 
 .modal-media-attachment #media-attachment-display {
-  min-height: 70vh;
-  max-height: 80vh;
+  min-height: 60vh;
+  max-height: 75vh;
 }
