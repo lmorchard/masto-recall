@@ -12,6 +12,7 @@
     "dev": "nodemon index.js serve | pino-pretty"
   },
   "nodemonConfig": {
+    "ext": "js,hbs",
     "ignore": [
       "data.sqlite3",
       "**/data/**"
@@ -25,14 +26,13 @@
     "@fastify/compress": "^6.2.0",
     "@fastify/static": "^6.6.1",
     "@hapi/boom": "^10.0.0",
-    "altair-fastify-plugin": "^5.0.9",
     "axios": "^1.2.2",
     "commander": "^10.0.0",
     "convict": "^6.2.4",
     "dotenv": "^16.0.3",
     "fastify": "^4.11.0",
+    "handlebars": "^4.7.7",
     "knex": "^2.4.0",
-    "mercurius": "^11.5.0",
     "nodemon": "^2.0.20",
     "objection": "^3.0.1",
     "p-queue": "^7.3.0",

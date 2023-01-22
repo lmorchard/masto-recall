@@ -1,0 +1,31 @@
+{{#> pageLayout}}
+<main class="form-search w-100 m-auto">
+
+  <form class="w-100 m-auto" method="GET" action="./">
+    <div class="container w-100">
+      <div class="row w-100">
+        <div class="col">
+          <input name="q" type="text" class="form-control" placeholder="" value="{{ searchQuery }}">
+        </div>
+        <div class="col col-md-1">
+          <button class="w-100 btn btn-primary" type="submit" title="Search">🔎</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <section class="container text-left mt-3 m-auto">
+    <div class="col">
+      <ul class="text-left">
+        {{#each searchResults}}
+          <li>
+            <a href="{{ url }}" target="_blank">{{ statusCreatedAt }}</a>: {{ account.display_name }}
+            <div>{{{ content }}}</div>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </section>
+
+</main>
+{{/pageLayout}}
