@@ -5,7 +5,7 @@
     <div class="container w-100">
       <div class="row w-100">
         <div class="col">
-          <input name="q" type="text" class="form-control" placeholder="" value="{{ searchQuery }}">
+          <input name="q" type="text" class="form-control" autofocus placeholder="search terms" value="{{ searchQuery }}">
         </div>
         <div class="col col-md-1">
           <button class="w-100 btn btn-primary" type="submit" title="Search">🔎</button>
@@ -16,11 +16,22 @@
 
   <section class="container text-left mt-3 m-auto">
     <div class="col">
-      <ul class="text-left">
+      <h2>Search for "{{ searchQuery }}" ({{ searchResults.length }} results)</h2>
+      <ul class="text-left search-results">
         {{#each searchResults}}
-          <li>
-            <a href="{{ url }}" target="_blank">{{ statusCreatedAt }}</a>: {{ account.display_name }}
-            <div>{{{ content }}}</div>
+          <li id="{{ id }}" class="card status">
+            <div class="card-header">
+              <!--{{ statusCreatedAt }}</a>-->
+              <a href="{{ account.url }}" target="_blank"><img class="avatar" src="{{ account.avatar }}" width="48" height="48" /></a>
+              <h5 class="card-title">{{ account.display_name }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ account.url }}" target="_blank">{{ account.acct }}</a></h6>
+            </div>
+            <div class="card-body">
+              <div class="card-text">{{{ content }}}</div>
+            </div>
+            <div class="card-footer fs-6 text-end text-muted">
+              <a href="{{ url }}" target="_blank"><time datetime="{{ created_at }}">{{ created_at_text }}</time></a>
+            </div>
           </li>
         {{/each}}
       </ul>

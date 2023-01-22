@@ -1,6 +1,7 @@
 html,
 body {
   height: 100%;
+  --avatar-size: 48px;
 }
 
 body {
@@ -12,4 +13,47 @@ body {
 
 .form-search {
   padding: 15px;
+}
+
+.search-results {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0;
+  text-indent: 0;
+  list-style-type: none;
+}
+
+.search-results .status {
+  max-width: 25rem;
+  margin: 0.5em 0.5em;
+  flex-grow: 1;
+}
+
+.status .card-header {
+  position: relative;
+}
+
+.status .card-header .avatar {
+  position: absolute;
+  top: var(--bs-card-cap-padding-y);
+  left: var(--bs-card-cap-padding-x);
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+}
+
+.status .card-header .card-title,
+.status .card-header .card-subtitle {
+  margin-left: calc(48px + var(--bs-card-cap-padding-x));
+}
+
+.status .card-body .card-text {
+  max-height: 10em;
+  overflow-y: scroll;
+}
+
+.search-results .status .invisible {
+  visibility: visible !important;
+  opacity: 0.5;
 }
