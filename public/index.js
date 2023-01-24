@@ -6,7 +6,7 @@ function init() {
   }
 
   document.body.addEventListener("click", (ev) => {
-    const { className, classList } = ev.target;
+    const { className } = ev.target;
     if (className == "media-attachment") {
       const { fullsrc } = ev.target.dataset;
       const description = ev.target.getAttribute("title");

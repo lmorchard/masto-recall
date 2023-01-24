@@ -54,7 +54,7 @@ body {
 
 .status .card-body .card-text {
   max-height: 10em;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .search-results .status .invisible {

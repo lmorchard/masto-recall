@@ -20,15 +20,17 @@
   {{#if search.query}}
     <section class="container mt-3 m-auto justify-content-center">
       <h2 class="text-center">Search for "{{ search.query }}" ({{ search.count }} results)</h2>
-      {{> searchPages}}
-      <div class="col">
-        <ul class="text-left search-results justify-content-center">
-          {{#each search.results}}
-            {{> statusCard }}
-          {{/each}}
-        </ul>
-      </div>
-      {{> searchPages}}
+      {{#if search.results}}
+        {{> searchPagination}}
+        <div class="col">
+          <ul class="text-left search-results justify-content-center">
+            {{#each search.results}}
+              {{> statusResult }}
+            {{/each}}
+          </ul>
+        </div>
+        {{> searchPagination}}
+      {{/if}}
     </section>
   {{/if}}
 
@@ -49,11 +51,11 @@
   </div>
 
   {{> pageMeta}}
-
 </main>
 {{/pageLayout}}
 
-{{#*inline "searchPages"}}
+{{#*inline "searchPagination"}}
+  {{#if search.showPagination}}
   <section class="pages container p-3">
     <div class="row justify-content-center">
       {{#with search.pagePrevious}}
@@ -79,9 +81,10 @@
       {{/with}}
     </div>
   </section>
+  {{/if}}
 {{/inline}}
 
-{{#*inline "statusCard"}}
+{{#*inline "statusResult"}}
   <li id="{{ id }}" class="card status">
     <div class="card-header">
       <a href="{{ account.url }}" target="_blank"><img class="avatar" src="{{ account.avatar }}" width="48" height="48" /></a>
