@@ -8,7 +8,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js serve",
+    "start": "npm-run-all -p serve streaming",
+    "serve": "node index.js serve",
+    "streaming": "node index.js streaming",
     "dev": "nodemon index.js serve | pino-pretty"
   },
   "nodemonConfig": {
@@ -34,6 +36,7 @@
     "handlebars": "^4.7.7",
     "knex": "^2.4.0",
     "nodemon": "^2.0.20",
+    "npm-run-all": "^4.1.5",
     "objection": "^3.0.1",
     "p-queue": "^7.3.0",
     "pino": "^8.8.0",
