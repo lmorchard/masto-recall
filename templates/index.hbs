@@ -1,74 +1,36 @@
 {{#> pageLayout}}
+
 <main class="form-search w-100 m-auto">
 
   <form class="w-100 m-auto" method="GET" action="./">
-    <div class="container w-100">
-      <div class="row w-100">
+    <div class="container">
+      <div class="row">
         <h1 class="text-center">{{ meta.botName }}</h1>
         <div class="col">
           <input id="searchField" name="q" type="text" class="form-control" 
             autofocus placeholder="search" value="{{ searchQuery }}">
         </div>
-        <div class="col col-md-1">
-          <button class="btn btn-primary" type="submit" title="Search">🔎</button>
+        <div class="col-auto">
+          <button class="btn btn-outline-primary" type="submit" title="Search">🔎</button>
         </div>
       </div>
     </div>
   </form>
 
-  {{#if searchQuery}}
-    <section class="container text-left mt-3 m-auto">
+  {{#if search.query}}
+    <section class="container mt-3 m-auto justify-content-center">
+      <h2 class="text-center">Search for "{{ search.query }}" ({{ search.count }} results)</h2>
+      {{> searchPages}}
       <div class="col">
-        <h2>Search for "{{ searchQuery }}" ({{ searchResults.length }} results)</h2>
-        <ul class="text-left search-results">
-          {{#each searchResults}}
-            <li id="{{ id }}" class="card status">
-              <div class="card-header">
-                <a href="{{ account.url }}" target="_blank"><img class="avatar" src="{{ account.avatar }}" width="48" height="48" /></a>
-                <h5 class="card-title">{{ account.display_name }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ account.url }}" target="_blank">{{ account.acct }}</a></h6>
-              </div>
-              <div class="card-body">
-                <div class="card-text">{{{ content }}}</div>
-              </div>
-              {{#if media_attachments.length }}
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item media-attachments">
-                    {{#each media_attachments }}
-                      <img class="media-attachment" src="{{ preview_url }}" width="48" height="48"
-                          data-bs-toggle="modal" data-bs-target="#exampleModal"
-                          data-fullsrc="{{ remote_url }}" title="{{ description }}" />
-                    {{/each}}
-                  </li>
-                </ul>
-              {{/if}}
-              <div class="card-footer fs-6 text-end text-muted">
-                <a href="{{ url }}" target="_blank"><time datetime="{{ created_at }}">{{ shortDateTime created_at }}</time></a>
-              </div>
-            </li>
+        <ul class="text-left search-results justify-content-center">
+          {{#each search.results}}
+            {{> statusCard }}
           {{/each}}
         </ul>
       </div>
+      {{> searchPages}}
     </section>
   {{/if}}
-
-  <div class="card text-center w-25 m-auto mt-5">
-    <div class="card-header">
-      <h5 class="card-title">Stats</h5>
-    </div>
-    <div class="card-body">
-      <table class="table">
-        <tbody>
-          {{#each meta as |value name|}}
-            <tr>
-              <td scope="row">{{ name }}</td>
-              <td>{{ value }}</td>
-            </tr>
-          {{/each}}
-        </tbody>
-      </table>
-    </div>
-  </div>
 
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-media-attachment">
@@ -85,5 +47,85 @@
       </div>
     </div>
   </div>
+
+  {{> pageMeta}}
+
 </main>
 {{/pageLayout}}
+
+{{#*inline "searchPages"}}
+  <section class="pages container p-3">
+    <div class="row justify-content-center">
+      {{#with search.pagePrevious}}
+        <a class="col-auto btn btn-outline-primary" href="?q={{../search.query}}&limit={{limit}}&offset={{offset}}">⬅️&nbsp;Previous</a>
+      {{else}}
+        <a class="col-auto btn btn-outline-primary disabled" disabled>⬅️&nbsp;Previous</a>
+      {{/with}}
+      {{#if search.pages }}
+        <form method="get" href="" class="col-auto search-pages">
+          <input type="hidden" name="q" value="{{search.query}}" />
+          <input type="hidden" name="limit" value="{{search.limit}}" />        
+            <select name="offset" class="form-select autosubmit" aria-label="Results page selection">
+              {{#each search.pages}}
+                <option value="{{offset}}" {{#if current}}selected{{/if}}>{{pageNumber}} of {{../search.pages.length}}</option>
+              {{/each}}
+            </select>
+        </form>
+      {{/if}}
+      {{#with search.pageNext}}
+        <a class="col flex-grow-0 btn btn-outline-primary" href="?q={{../search.query}}&limit={{limit}}&offset={{offset}}">Next&nbsp;➡️</a>
+      {{else}}
+        <a class="col-auto btn btn-outline-primary disabled" disabled>Next&nbsp;➡️</a>
+      {{/with}}
+    </div>
+  </section>
+{{/inline}}
+
+{{#*inline "statusCard"}}
+  <li id="{{ id }}" class="card status">
+    <div class="card-header">
+      <a href="{{ account.url }}" target="_blank"><img class="avatar" src="{{ account.avatar }}" width="48" height="48" /></a>
+      <h5 class="card-title">{{ account.display_name }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ account.url }}" target="_blank">{{ account.acct }}</a></h6>
+    </div>
+    <div class="card-body">
+      <div class="card-text">{{{ content }}}</div>
+    </div>
+    {{#if media_attachments.length }}
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item media-attachments">
+          {{#each media_attachments }}
+            <img class="media-attachment" src="{{ preview_url }}" width="48" height="48"
+                data-bs-toggle="modal" data-bs-target="#exampleModal"
+                data-fullsrc="{{ remote_url }}" title="{{ description }}" />
+          {{/each}}
+        </li>
+      </ul>
+    {{/if}}
+    <div class="card-footer fs-6 text-end text-muted">
+      <a href="{{ url }}" target="_blank"><time datetime="{{ created_at }}">{{ shortDateTime created_at }}</time></a>
+    </div>
+  </li>
+{{/inline}}
+
+{{#*inline "pageMeta"}}
+  <section class="container page-meta mt-5">
+    <div class="card text-center">
+      <div class="card-header">
+        <h5 class="card-title">Stats</h5>
+      </div>
+      <div class="card-body table-responsive">
+        <table class="table table-sm">
+          <tbody>
+            {{#each meta as |value name|}}
+              <tr>
+                <td scope="row">{{ name }}</td>
+                <td>{{ value }}</td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+{{/inline}}

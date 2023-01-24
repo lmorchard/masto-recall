@@ -11,6 +11,10 @@ body {
   padding-bottom: 40px;
 }
 
+.page-meta {
+  max-width: 27rem;
+}
+
 .form-search {
   padding: 15px;
 }
