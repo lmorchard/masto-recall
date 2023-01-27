@@ -17,9 +17,16 @@
     </div>
   </form>
 
-  {{#if search.query}}
+  {{#if search.results}}
     <section class="container mt-3 m-auto justify-content-center">
-      <h2 class="text-center">Search for "{{ search.query }}" ({{ search.count }} results)</h2>
+      <h2 class="text-center">
+        {{#if search.query }}
+          Search for "{{ search.query }}"
+        {{else}}
+          Recent
+        {{/if}}
+        ({{ search.count }} results)
+      </h2>
       {{#if search.results}}
         {{> searchPagination}}
         <div class="col">
