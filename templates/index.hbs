@@ -107,7 +107,7 @@
           {{#each media_attachments }}
             <img class="media-attachment" src="{{ preview_url }}" width="48" height="48"
                 data-bs-toggle="modal" data-bs-target="#exampleModal"
-                data-fullsrc="{{ remote_url }}" title="{{ description }}" />
+                data-fullsrc="{{ coalesce remote_url preview_url }}" title="{{ description }}" />
           {{/each}}
         </li>
       </ul>

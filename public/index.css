@@ -67,6 +67,6 @@ body {
 }
 
 .modal-media-attachment #media-attachment-display {
-  min-height: 60vh;
+  /* min-height: 60vh; */
   max-height: 75vh;
 }
