@@ -114,6 +114,7 @@
     {{/if}}
     <div class="card-footer fs-6 text-end text-muted">
       <a href="{{ url }}" target="_blank"><time datetime="{{ created_at }}">{{ shortDateTime created_at }}</time></a>
+      <button title="Open in home instance" class="goto-home-instance btn btn-outline-primary" data-uri="{{ url }}">🚀</button>
     </div>
   </li>
 {{/inline}}
@@ -135,6 +136,7 @@
             {{/each}}
           </tbody>
         </table>
+        <button class="reset-home-instance-domain btn btn-outline-primary">Reset home instance</button>
       </div>
     </div>
   </section>

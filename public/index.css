@@ -57,6 +57,11 @@ body {
   overflow-y: auto;
 }
 
+.status button.goto-home-instance {
+  margin-left: 0.5em;
+  font-size: 0.75em
+}
+
 .search-results .status .invisible {
   visibility: visible !important;
   opacity: 0.5;
