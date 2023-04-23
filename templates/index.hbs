@@ -103,10 +103,10 @@
 {{#*inline "statusResult"}}
   <li id="{{ id }}" class="card status">
     <div class="card-header">
-      <a href="{{ account.url }}" target="_blank"><img class="avatar"
-          src="{{ coalesce account.avatar actor.icon.url }}" width="48" height="48" /></a>
-      <h5 class="card-title">{{ coalesce account.display_name actor.name }}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ coalesce account.url actor.url }}" target="_blank">{{ coalesce account.acct actor.preferredUsername }}</a></h6>
+      <a href="{{ accountUrl }}" target="_blank"><img class="avatar"
+          src="{{ accountAvatarUrl }}" width="48" height="48" /></a>
+      <h5 class="card-title">{{ accountName }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ accountUrl }}" target="_blank">{{ coalesce account.acct actor.preferredUsername }}</a></h6>
     </div>
     <div class="card-body">
       <div class="card-text">{{{ content }}}</div>
@@ -123,7 +123,7 @@
       </ul>
     {{/if}}
     <div class="card-footer fs-6 text-end text-muted">
-      <a href="{{ url }}" target="_blank"><time datetime="{{ created_at }}">{{ shortDateTime created_at }}</time></a>
+      <a href="{{ url }}" target="_blank"><time datetime="{{ publishedAt }}" title="{{ publishedAt }}">{{ shortDateTime publishedAt }}</time></a>
       <button title="Open in home instance" class="goto-home-instance btn btn-outline-primary" data-uri="{{ url }}">🚀</button>
     </div>
   </li>
