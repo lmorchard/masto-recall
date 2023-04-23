@@ -17,6 +17,15 @@
     </div>
   </form>
 
+  {{#if error }}
+    <section class="container mt-3 m-auto justify-content-center alert alert-danger" role="alert">
+      <h2>Error</h2>
+      <p>
+        {{ error }}
+      </p>
+    </section>
+  {{/if}}
+
   {{#if search.results}}
     <section class="container mt-3 m-auto justify-content-center">
       <h2 class="text-center">
@@ -94,9 +103,10 @@
 {{#*inline "statusResult"}}
   <li id="{{ id }}" class="card status">
     <div class="card-header">
-      <a href="{{ account.url }}" target="_blank"><img class="avatar" src="{{ account.avatar }}" width="48" height="48" /></a>
-      <h5 class="card-title">{{ account.display_name }}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ account.url }}" target="_blank">{{ account.acct }}</a></h6>
+      <a href="{{ account.url }}" target="_blank"><img class="avatar"
+          src="{{ coalesce account.avatar actor.icon.url }}" width="48" height="48" /></a>
+      <h5 class="card-title">{{ coalesce account.display_name actor.name }}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ coalesce account.url actor.url }}" target="_blank">{{ coalesce account.acct actor.preferredUsername }}</a></h6>
     </div>
     <div class="card-body">
       <div class="card-text">{{{ content }}}</div>
