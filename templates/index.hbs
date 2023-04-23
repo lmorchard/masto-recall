@@ -109,7 +109,13 @@
       <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ accountUrl }}" target="_blank">{{ coalesce account.acct actor.url }}</a></h6>
     </div>
     <div class="card-body">
-      <div class="card-text">{{{ content }}}</div>
+      <div class="card-text">
+        {{#if content }}
+          {{{ content }}}
+        {{ else }}
+          ♻️ <a href="{{ object }}" class="retoot">{{ object }}</a>
+        {{/if}}
+      </div>
     </div>
     {{#if media_attachments.length }}
       <ul class="list-group list-group-flush">
