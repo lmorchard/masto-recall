@@ -106,7 +106,7 @@
       <a href="{{ accountUrl }}" target="_blank"><img class="avatar"
           src="{{ accountAvatarUrl }}" width="48" height="48" /></a>
       <h5 class="card-title">{{ accountName }}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ accountUrl }}" target="_blank">{{ coalesce account.acct actor.preferredUsername }}</a></h6>
+      <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ accountUrl }}" target="_blank">{{ coalesce account.acct actor.url }}</a></h6>
     </div>
     <div class="card-body">
       <div class="card-text">{{{ content }}}</div>
