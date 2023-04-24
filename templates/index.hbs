@@ -101,19 +101,23 @@
 {{/inline}}
 
 {{#*inline "statusResult"}}
-  <li id="{{ id }}" class="card status">
+  <li id="{{ id }}" class="card status" data-json="{{ json }}">
     <div class="card-header">
       <a href="{{ accountUrl }}" target="_blank"><img class="avatar"
           src="{{ accountAvatarUrl }}" width="48" height="48" /></a>
       <h5 class="card-title">{{ accountName }}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ accountUrl }}" target="_blank">{{ coalesce account.acct actor.url }}</a></h6>
+      <h6 class="card-subtitle mb-2 text-muted">@<a href="{{ accountUrl }}" target="_blank">{{ accountUrl }}</a></h6>
     </div>
     <div class="card-body">
       <div class="card-text">
+        {{#or spoilerText summary }}
+          <h6><span class="spoiler-text badge text-bg-warning">{{ default spoilerText summary }}</span></h6>
+        {{/or}}
+        {{#eq type "Announce"}}
+          ♻️ <a href="{{ object }}" class="retoot">{{ object }}</a>
+        {{/eq}}
         {{#if content }}
           {{{ content }}}
-        {{ else }}
-          ♻️ <a href="{{ object }}" class="retoot">{{ object }}</a>
         {{/if}}
       </div>
     </div>
@@ -150,6 +154,10 @@
                 <td>{{ value }}</td>
               </tr>
             {{/each}}
+              <tr>
+                <td scope="row">resultsSql</td>
+                <td>{{ search.resultsSql }}</td>
+              </tr>
           </tbody>
         </table>
         <button class="reset-home-instance-domain btn btn-outline-primary">Reset home instance</button>
