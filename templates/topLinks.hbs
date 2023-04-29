@@ -1,22 +1,44 @@
 {{#> pageLayout}}
 <main class="form-search w-100 m-auto">
 
-  {{#each links}}
-    <section class="container mt-3 m-auto justify-content-center">
-      <details>
-        <summary>
-          {{ accountCount }} - {{ normalized }}
-        </summary>
+  <form class="w-100 m-auto" method="GET" action="/">
+    <div class="container">
+      <div class="row">
+        <h1 class="text-center">{{ meta.botName }}</h1>
         <div class="col">
-          <ul class="text-left search-results justify-content-center">
-            {{#each (lookup ../statusesByNormalized normalized)}}
-              {{> statusResult }}
-            {{/each}}
-          </ul>
+          <input id="searchField" name="q" type="text" class="form-control" 
+            autofocus placeholder="search" value="{{ search.query }}">
         </div>
-      </details>
-    </section>
-  {{/each}}
+        <div class="col-auto">
+          <button class="btn btn-outline-primary" type="submit" title="Search">🔎</button>
+        </div>
+      </div>
+    </div>
+  </form>
 
+
+  <section class="container mt-3 m-auto justify-content-center">
+    <h2>Top links <span class="badge rounded-pill text-bg-primary">{{ limit }}</span></h2>
+    <ul class="list-group">
+    {{#each links}}
+      <li class="list-group-item">
+        <details>
+          <summary class="fs-5 text-truncate">
+            <span class="badge rounded-pill text-bg-primary">{{ accountCount }}</span>
+            <span class="ms-3">{{ normalized }}</span>
+          </summary>
+          <div class="col">
+            <ul class="text-left search-results justify-content-center">
+              {{#each (lookup ../statusesByNormalized normalized)}}
+                {{> statusResult }}
+              {{/each}}
+            </ul>
+          </div>
+        </details>
+      </li>
+    {{/each}}
+    </ul>
+  </section>
+  {{> pageMeta}}
 </main>
 {{/pageLayout}}
