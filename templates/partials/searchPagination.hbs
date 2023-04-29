@@ -1,0 +1,27 @@
+{{#if search.showPagination}}
+<section class="pages container p-3">
+  <div class="row justify-content-center">
+    {{#with search.pagePrevious}}
+      <a class="col-auto btn btn-outline-primary" href="?q={{../search.query}}&limit={{limit}}&offset={{offset}}">⬅️&nbsp;Previous</a>
+    {{else}}
+      <a class="col-auto btn btn-outline-primary disabled" disabled>⬅️&nbsp;Previous</a>
+    {{/with}}
+    {{#if search.pages }}
+      <form method="get" href="" class="col-auto search-pages">
+        <input type="hidden" name="q" value="{{search.query}}" />
+        <input type="hidden" name="limit" value="{{search.limit}}" />        
+          <select name="offset" class="form-select autosubmit" aria-label="Results page selection">
+            {{#each search.pages}}
+              <option value="{{offset}}" {{#if current}}selected{{/if}}>{{pageNumber}} of {{../search.pages.length}}</option>
+            {{/each}}
+          </select>
+      </form>
+    {{/if}}
+    {{#with search.pageNext}}
+      <a class="col flex-grow-0 btn btn-outline-primary" href="?q={{../search.query}}&limit={{limit}}&offset={{offset}}">Next&nbsp;➡️</a>
+    {{else}}
+      <a class="col-auto btn btn-outline-primary disabled" disabled>Next&nbsp;➡️</a>
+    {{/with}}
+  </div>
+</section>
+{{/if}}

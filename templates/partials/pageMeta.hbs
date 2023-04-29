@@ -1,0 +1,24 @@
+<section class="container page-meta mt-5">
+  <div class="card text-center">
+    <div class="card-header">
+      <h5 class="card-title">Stats</h5>
+    </div>
+    <div class="card-body table-responsive">
+      <table class="table table-sm">
+        <tbody>
+          {{#each meta as |value name|}}
+            <tr>
+              <td scope="row">{{ name }}</td>
+              <td>{{ value }}</td>
+            </tr>
+          {{/each}}
+            <tr>
+              <td scope="row">resultsSql</td>
+              <td>{{ search.resultsSql }}</td>
+            </tr>
+        </tbody>
+      </table>
+      <button class="reset-home-instance-domain btn btn-outline-primary">Reset home instance</button>
+    </div>
+  </div>
+</section>

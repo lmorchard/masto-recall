@@ -1,0 +1,22 @@
+{{#> pageLayout}}
+<main class="form-search w-100 m-auto">
+
+  {{#each links}}
+    <section class="container mt-3 m-auto justify-content-center">
+      <details>
+        <summary>
+          {{ accountCount }} - {{ normalized }}
+        </summary>
+        <div class="col">
+          <ul class="text-left search-results justify-content-center">
+            {{#each (lookup ../statusesByNormalized normalized)}}
+              {{> statusResult }}
+            {{/each}}
+          </ul>
+        </div>
+      </details>
+    </section>
+  {{/each}}
+
+</main>
+{{/pageLayout}}
