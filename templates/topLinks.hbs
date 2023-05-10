@@ -18,7 +18,7 @@
 
 
   <section class="container mt-3 m-auto justify-content-center">
-    <h2>Top links <span class="badge rounded-pill text-bg-primary">{{ limit }}</span></h2>
+    <h2><span class="badge rounded-pill text-bg-primary">{{ query.limit }}</span> Top links over {{ query.hours }} hours</h2>
     <ul class="list-group">
     {{#each links}}
       <li class="list-group-item">
@@ -27,7 +27,7 @@
             <span class="badge rounded-pill text-bg-primary">{{ accountCount }}</span>
             <span class="ms-3">{{ normalized }}</span>
           </summary>
-          <div class="col">
+          <div class="col my-3">
             <ul class="text-left search-results justify-content-center">
               {{#each (lookup ../statusesByNormalized normalized)}}
                 {{> statusResult }}
