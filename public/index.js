@@ -8,6 +8,22 @@ function init() {
   }
   document.body.addEventListener("click", handleClick);
   document.body.addEventListener("change", handleChange);
+
+  setupWebSocket();
+}
+
+function setupWebSocket() {
+  const { protocol, host, pathname } = window.location;
+  const socketURL = `${protocol === "https:" ? "wss:" : "ws:"}//${host}/socket`;
+  console.log(`Connecting to websocket at ${socketURL}`);
+  
+  const socket = new WebSocket(socketURL);
+  socket.addEventListener("open", (event) => {
+    socket.send("Hello Server!");
+  });
+  socket.addEventListener("message", (event) => {
+    console.log("Message from server ", event.data);
+  });
 }
 
 async function getHomeInstanceDomain() {
@@ -54,7 +70,7 @@ async function handleClick(ev) {
   }
 
   if (classList.contains("reset-home-instance-domain")) {
-    resetHomeInstanceDomain();    
+    resetHomeInstanceDomain();
   }
 }
 
