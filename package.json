@@ -35,8 +35,10 @@
     "convict": "^6.2.4",
     "dotenv": "^16.0.3",
     "fastify": "^4.17.0",
+    "gunzip-maybe": "^1.4.2",
     "handlebars": "^4.7.7",
     "handlebars-helpers": "^0.10.0",
+    "jszip": "^3.10.1",
     "knex": "^2.4.0",
     "liquery": "^0.10.0",
     "nodemon": "^2.0.20",
@@ -49,6 +51,7 @@
     "pino-pretty": "^9.1.1",
     "sqlite3": "^5.1.4",
     "tall": "^8.0.0",
+    "tar-stream": "^3.0.0",
     "ws": "^8.12.0"
   }
 }

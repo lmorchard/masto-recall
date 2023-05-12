@@ -1,3 +1,5 @@
+import { WebSocketHandler } from "./websockets.js";
+
 const KEY_HOME_INSTANCE_DOMAIN = "home-instance-domain";
 
 function init() {
@@ -13,17 +15,7 @@ function init() {
 }
 
 function setupWebSocket() {
-  const { protocol, host, pathname } = window.location;
-  const socketURL = `${protocol === "https:" ? "wss:" : "ws:"}//${host}/socket`;
-  console.log(`Connecting to websocket at ${socketURL}`);
-  
-  const socket = new WebSocket(socketURL);
-  socket.addEventListener("open", (event) => {
-    socket.send("Hello Server!");
-  });
-  socket.addEventListener("message", (event) => {
-    console.log("Message from server ", event.data);
-  });
+  new WebSocketHandler().connect();
 }
 
 async function getHomeInstanceDomain() {
