@@ -20,3 +20,4 @@ TBD
 - [ ] Split statuses into per-day DBs? one DB gets big too fast?
 - [ ] Split links into per-day DBs?
 - [ ] Enumerate what questions I want to answer with this project
+- [ ] periodically vacuum & optimize the DB
